@@ -11,12 +11,12 @@ namespace MiprimeraAPIs.Controllers
     {
         [Route("InformacionEstudiante")]
         [HttpGet]
-        
-        public Estudiante DevuelveInformacionEstudiante()
+
+        public ActionResult DevuelveInformacionEstudiante()
         {
             EstudiantesRepository repositorio = new EstudiantesRepository();
             var estudiante = repositorio.DevuelveInformacionEstudiante();
-            return estudiante;
+            return Ok(estudiante);
         }
 
         [Route("ListadoEstudiantes")]
@@ -33,6 +33,15 @@ namespace MiprimeraAPIs.Controllers
         {
             EstudiantesRepository repositorio = new EstudiantesRepository();
             return repositorio.DevuelveListadoEstudiantes().Where(x => x.EstaInscrito == true).ToList();
+        }
+
+
+        [Route("ListadoNombresEstudiantes)/{nombre}")]
+        [HttpGet]
+        public List<Estudiante> DevuelveListadoNombreEstudiantes(String Nombre)
+        {
+            EstudiantesRepository repositorio = new EstudiantesRepository();
+            return repositorio.DevuelveListadoEstudiantes().Where(x => x.Nombre == Nombre).ToList();
         }
     }
 }
